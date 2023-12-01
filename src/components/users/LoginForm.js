@@ -86,7 +86,7 @@ const LoginForm = () => {
             Login
           </button>
           <label>
-            <input type="checkbox" defaultChecked name="remember" /> Remember me
+            <input type="checkbox" defaultChecked name="remember" /> Remember me Login
           </label>
         </div>
       </form>
