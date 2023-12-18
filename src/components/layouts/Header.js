@@ -10,6 +10,7 @@ const Header = () => {
 
   const commonLinks = [
     { to: "/home", label: "Home" },
+    { to: "/users", label: "Users" },
     { to: "/products", label: "Products" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },

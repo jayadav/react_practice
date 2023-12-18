@@ -13,6 +13,7 @@ import Products from "./components/products/Products";
 import { AuthProvider } from "./context/AuthContext";
 import LogOut from "./components/users/LogOut";
 import Cart from "./components/products/Cart";
+import Users from "./components/users/Users";
 // const Loginhoc = WithLoader(LoginForm);
 
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: "/home", element: <Home /> },
+      { path: "/users", element: <Users /> },
       { path: "/login", element: <LoginForm /> },
       {
         path: "/about",
