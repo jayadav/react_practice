@@ -3,11 +3,12 @@ import UserForm from "./UserForm";
 import UsersList from "./UsersList";
 function Users() {
   const [users, setUsers] = useState([]);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(window.localStorage.getItem("users"));
   const clearInput = useRef(null);
   const saveUsers = (user) => {
     // console.log(user);
     setUsers([...users, user]);
+    window.localStorage.setItem("users", users);
     setMessage("Data saved successfully!!!");
     clearInputBox();
   };

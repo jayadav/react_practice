@@ -56,7 +56,7 @@ describe("User From Test", () => {
     user.click(button);
 
     expect(global.alert).toHaveBeenCalledWith("Mobile number is not valid.");
-    
+
     // user.clear(global.alert)
     // user.click(mobile);
     // user.keyboard("9582947883");
@@ -65,10 +65,8 @@ describe("User From Test", () => {
   });
 
   test("Check Form submitted and callback function called", () => {
-    const argList = [];
-    const callback = (...args) => {
-      argList.push(args);
-    };
+    // const argList = [];
+    const callback = jest.fn();
     render(<UserForm saveUsers={callback} />);
     const [name, mobile, email] = screen.getAllByRole("textbox");
     user.click(name);
@@ -81,8 +79,14 @@ describe("User From Test", () => {
     const button = screen.getByRole("button");
     user.click(button);
     // expect(global.alert).toHaveBeenCalled("Please enter all field.")
-    expect(argList).toHaveLength(1);
-    expect(argList[0][0]).toEqual({
+    // expect(argList).toHaveLength(1);
+    // expect(argList[0][0]).toEqual({
+    //   email: "jay.shankar20@gmail.com",
+    //   mobile: "9582947883",
+    //   name: "Jay",
+    // });
+    expect(callback).toHaveBeenCalled();
+    expect(callback).toHaveBeenCalledWith({
       email: "jay.shankar20@gmail.com",
       mobile: "9582947883",
       name: "Jay",
