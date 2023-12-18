@@ -9,6 +9,7 @@ describe("Test Users List Component", () => {
       { name: "JayS", mobile: "9582947882", email: "jay2@gmail.com" },
     ];
     const { container } = render(<UsersList users={users} />);
+    // eslint-disable-next-line
     const rows = container.querySelectorAll('tbody tr');
     expect(rows).toHaveLength(2)
   });
