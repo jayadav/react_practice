@@ -26,7 +26,7 @@ function UsersList(props) {
             <th>Email</th>
           </tr>
         </thead>
-        <tbody>{userTbl}</tbody>
+        <tbody data-testid="users">{userTbl}</tbody>
       </table>
       <style jsx="true">
         {`

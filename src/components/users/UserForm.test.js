@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import UserForm from "./UserForm";
 // import { keyboard } from "@testing-library/user-event/dist/keyboard";
@@ -92,4 +92,74 @@ describe("User From Test", () => {
       name: "Jay",
     });
   });
+
+  test("Input values should be empty after submitting the form", async () => {
+    const mock = jest.fn();
+    render(<UserForm saveUsers={mock} />);
+    const name = screen.getByLabelText(/name/i);
+    const mobile = screen.getByLabelText(/mobile/i);
+    const email = screen.getByLabelText(/email/i);
+    const button = screen.getByRole("button");
+
+    user.type(name, "Jay");
+    user.type(mobile, "9582947883");
+    user.type(email, "jay@gmail.com");
+
+    user.click(button);
+
+    // screen.debug()
+
+    // Use waitFor to wait for the asynchronous operation to complete
+    await waitFor(() => {
+      expect(mock).toHaveBeenCalled();
+      // eslint-disable-next-line
+      expect(name).toHaveValue("");
+      // eslint-disable-next-line
+      expect(mobile).toHaveValue("");
+      // eslint-disable-next-line
+      expect(email).toHaveValue("");
+    });
+  });
+
+  // jest.useFakeTimers();
+  // test("Input values should empty after submitted the form", async () => {
+  //   const mock = jest.fn();
+  //   render(<UserForm saveUsers={mock} />);
+  //   const name = screen.getByRole("textbox", {
+  //     name: /name/i,
+  //   });
+
+  //   const mobile = screen.getByRole("textbox", {
+  //     name: /mobile/i,
+  //   });
+
+  //   const email = screen.getByRole("textbox", {
+  //     name: /email/i,
+  //   });
+
+  //   const button = screen.getByRole("button");
+
+  //   user.click(name);
+  //   user.keyboard("Jay");
+
+  //   user.click(mobile);
+  //   user.keyboard("9582947883");
+
+  //   user.click(email);
+  //   user.keyboard("jay@gmail.com");
+
+  //   // screen.debug()
+  //   user.click(button);
+
+  //   expect(mock).toHaveBeenCalled();
+  //   await act(async () => {
+  //     jest.advanceTimersByTime(2000);
+  //     expect(name).toHaveValue("");
+  //     // await waitFor(() => {
+  //     //   expect(name).toHaveValue("");
+  //     //   // expect(mobile).toHaveValue("");
+  //     //   // expect(email).toHaveValue("");
+  //     // });
+  //   });
+  // });
 });

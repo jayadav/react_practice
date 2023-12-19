@@ -7,14 +7,14 @@ const UserForm = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     clear: () => {
-      setName("");
-      setMobile("");
-      setEmail("");
+      setName(() => "");
+      setEmail(() => "");
+      setMobile(() => "");
     },
   }));
 
   const validateMobile = (mobile_num) => {
-    const numResgx = /^[0-9]+$/
+    const numResgx = /^[0-9]+$/;
     if (numResgx.test(mobile_num)) {
       return true;
     } else {
@@ -30,16 +30,18 @@ const UserForm = forwardRef((props, ref) => {
       return false;
     }
     if (mobile) {
-      if(validateMobile(mobile)){
+      if (validateMobile(mobile)) {
         const users = {
           name,
           mobile,
           email,
         };
         props.saveUsers(users);
+        setName(() => "");
+        setEmail(() => "");
+        setMobile(() => "");
       }
     }
-    
   };
 
   return (
@@ -73,11 +75,12 @@ const UserForm = forwardRef((props, ref) => {
         </div>
 
         <div>
-          <label htmlFor="umobile">Email</label>
+          <label htmlFor="uemail">Email</label>
           <input
             id="uemail"
             type="email"
             name="email"
+            data-testid="email"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
